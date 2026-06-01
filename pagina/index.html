@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planeta Verde</title>
+<style>
+/* Reset básico */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:linear-gradient(-45deg,#2e7d32,#4caf50,#81c784,#1b5e20);
+    background-size:400% 400%;
+    animation:fundoAnimado 12s ease infinite;
+    color:white;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+@keyframes fundoAnimado{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* Página */
+.pagina{
+    display:none;
+    padding:40px 20px;
+    text-align:center;
+    min-height:100vh;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.ativa{
+    display:flex;
+}
+
+h1{
+    font-size:3rem;
+    margin-bottom:20px;
+    text-shadow:0 0 15px rgba(0,0,0,0.4);
+}
+
+p{
+    max-width:700px;
+    margin-bottom:30px;
+    font-size:1.2rem;
+    line-height:1.5;
+}
+
+/* Botões */
+.botao{
+    padding:15px 35px;
+    margin:10px;
+    border:none;
+    border-radius:50px;
+    background:white;
+    color:#2e7d32;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+    position:relative;
+    overflow:hidden;
+}
+
+.botao:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 20px rgba(255,255,255,0.6);
+}
+
+/* Cards de dicas */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    margin-top:30px;
+}
+
+.card{
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    padding:20px;
+    border-radius:20px;
+    transition:.4s;
+    border:1px solid rgba(255,255,255,.2);
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.03);
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
+}
+
+/* Mensagem inspiradora */
+#mensagem{
+    margin-top:20px;
+    font-size:1.3rem;
+    font-weight:bold;
+    min-height:40px;
+}
+
+/* Folhas animadas */
+.folha{
+    position:fixed;
+    top:-50px;
+    font-size:30px;
+    animation:cair linear infinite;
+    pointer-events:none;
+}
+
+@keyframes cair{
+    to{
+        transform:translateY(110vh) rotate(360deg);
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- Página Inicial -->
+<section id="pagina1" class="pagina ativa">
+    <h1>🌎 Salve o Meio Ambiente</h1>
+    <p>Pequenas atitudes fazem uma grande diferença para o planeta. Economize água, recicle e preserve a natureza.</p>
+
+    <button class="botao" onclick="gerarMensagem()">🌱 Frase Inspiradora</button>
+    <div id="mensagem"></div>
+
+    <div class="cards">
+        <div class="card">
+            <h3>💧 Economize Água</h3>
+            <p>Feche a torneira ao escovar os dentes e reutilize água sempre que possível.</p>
+        </div>
+        <div class="card">
+            <h3>♻️ Recicle</h3>
+            <p>Separar resíduos ajuda a reduzir a poluição e economiza recursos naturais.</p>
+        </div>
+        <div class="card">
+            <h3>🌳 Plante Árvores</h3>
+            <p>Árvores absorvem CO₂ e ajudam a manter o equilíbrio climático.</p>
+        </div>
+        <div class="card">
+            <h3>🚲 Transporte Sustentável</h3>
+            <p>Caminhar ou usar bicicleta reduz a emissão de gases poluentes.</p>
+        </div>
+    </div>
+
+    <button class="botao" onclick="abrirPagina2()">➡ Próxima Página</button>
+</section>
+
+<!-- Próxima Página -->
+<section id="pagina2" class="pagina">
+    <h1>🚀 Missão Verde</h1>
+    <p>Parabéns! Você avançou para a próxima etapa. Agora seu desafio é plantar uma árvore, reciclar um material ou economizar água hoje mesmo.</p>
+
+    <button class="botao" onclick="voltarPagina1()">⬅ Voltar</button>
+</section>
+
+<script>
+// Frases inspiradoras
+const mensagens = [
+    "🌱 Toda grande floresta começou com uma pequena semente.",
+    "🌎 O planeta não precisa de heróis, precisa de milhões de pessoas conscientes.",
+    "💚 A natureza devolve tudo aquilo que cuidamos.",
+    "♻️ Reciclar hoje é preservar o amanhã.",
+    "🌳 Quem planta uma árvore planta esperança.",
+    "☀️ Pequenas ações criam grandes mudanças."
+];
+
+function gerarMensagem(){
+    const msg = mensagens[Math.floor(Math.random() * mensagens.length)];
+    document.getElementById("mensagem").innerText = msg;
+}
+
+// Navegação entre páginas
+function abrirPagina2(){
+    document.getElementById("pagina1").classList.remove("ativa");
+    document.getElementById("pagina2").classList.add("ativa");
+}
+
+function voltarPagina1(){
+    document.getElementById("pagina2").classList.remove("ativa");
+    document.getElementById("pagina1").classList.add("ativa");
+}
+
+// Folhas caindo
+function criarFolha(){
+    const folha = document.createElement("div");
+    folha.classList.add("folha");
+    folha.innerHTML = ["🍃","🌿","🍀"][Math.floor(Math.random()*3)];
+    folha.style.left = Math.random()*100 + "vw";
+    folha.style.animationDuration = (5 + Math.random()*8) + "s";
+    folha.style.opacity = Math.random();
+    document.body.appendChild(folha);
+    setTimeout(()=>{folha.remove()},13000);
+}
+setInterval(criarFolha, 400);
+</script>
+
+</body>
+</html>
