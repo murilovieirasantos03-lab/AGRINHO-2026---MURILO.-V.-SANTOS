@@ -8,5 +8,7 @@ O site deveria ter responsividade, algo que foi cumprido.
 # DADOS
 
 Colégio Estadual Dr Marins Alves de Camargo
+
 Aluno: Murilo Vieira Santos
+
 Turma: 2° A
